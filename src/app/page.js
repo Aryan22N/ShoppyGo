@@ -1,6 +1,11 @@
 import Image from "next/image";
-import { Hero } from "../../public/featured.png";
 
+import Hero from "../components/Hero.jsx";
 export default function Home() {
-  return <div>Hero Section</div>;
+  return (
+    <div>
+      {/* <Image src={Hero} alt="Hero Ing" className="max-w-[1080px]" /> */}
+      <Hero />
+    </div>
+  );
 }

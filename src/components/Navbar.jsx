@@ -10,7 +10,7 @@ import Image from "next/image";
 
 const Navbar = () => {
   return (
-    <nav className="bg-white shadow xl:max-w-[1080px] max-w-[1000px] mx-auto rounded-2xl border-gray-200">
+    <nav className="bg-white shadow xl:max-w-[1180px] max-w-[1000px] mx-auto rounded-2xl border-gray-200">
       <div className="max-w-[1080px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-wrap justify-between items-center h-auto py-2">
           {/* Left side */}

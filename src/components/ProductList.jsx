@@ -1,6 +1,7 @@
 import React from "react";
 import ProductCard from "./ProductCard";
 import Categories from "./Categories";
+import Link from "next/link";
 
 // Temporary Data
 const Products = [
@@ -114,15 +115,22 @@ const Products = [
   },
 ];
 
-const ProductList = () => {
+const ProductList = ({ category }) => {
   return (
-    <div className="max-w-[1080px] mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+    <div className="max-w-[1180px] mx-auto px-4 sm:px-6 lg:px-8 mt-8">
       <Categories />
-      <div className="grid grid-col-1 sm:grid-col-2 xl:grid-col-3 2xl:grid-col-4 text-black gap-12">
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 text-black mt-[30px]  2xl:grid-cols-5 gap-5">
         {Products.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
       </div>
+      // Link to view all products
+      <Link
+        className="flex justify-end items-center text-gray-400 hover:text-gray-800 transition-colors duration-200 mt-6"
+        href={category ? `/products/?category=${category}` : "/products"}
+      >
+        View all Products
+      </Link>
     </div>
   );
 };

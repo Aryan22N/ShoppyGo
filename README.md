@@ -1,36 +1,88 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Shoppify E-commerce Project Overview
 
-## Getting Started
+This project is a Next.js-based e-commerce application. Below is a step-by-step explanation of its workflow and routing structure.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 1. Project Initialization
+
+- The project uses [Next.js](https://nextjs.org/) for server-side rendering and routing.
+- Dependencies are installed via `npm install` or `yarn`.
+
+---
+
+## 2. Folder Structure
+
+```
+/pages
+    /index.js         // Home page
+    /products
+        /[id].js        // Product details page
+    /cart.js          // Shopping cart page
+    /checkout.js      // Checkout page
+    /api
+        /products.js    // API route for products
+        /orders.js      // API route for orders
+/components        // Reusable UI components
+/styles            // CSS/SCSS files
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## 3. Routing Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Home (`/`)**: Displays featured products and categories.
+- **Product Details (`/products/[id]`)**: Dynamic route showing details for a selected product.
+- **Cart (`/cart`)**: Shows items added to the shopping cart.
+- **Checkout (`/checkout`)**: Handles order placement and payment.
+- **API Routes (`/api/*`)**: Backend endpoints for products and orders.
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 4. Step-by-Step Workflow
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. **User visits Home Page (`/`)**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+   - Product listings are fetched from the API.
+   - User can browse and select products.
 
-## Deploy on Vercel
+2. **User views Product Details (`/products/[id]`)**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+   - Dynamic route loads product info based on the `id` parameter.
+   - User can add product to cart.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+3. **User accesses Cart (`/cart`)**
+
+   - Displays all products added.
+   - User can update quantities or remove items.
+
+4. **User proceeds to Checkout (`/checkout`)**
+
+   - User enters shipping and payment details.
+   - Order is submitted via API.
+
+5. **API Routes**
+   - `/api/products`: Handles product data (fetch, create, update).
+   - `/api/orders`: Handles order creation and retrieval.
+
+---
+
+## 5. Additional Features
+
+- Authentication (if implemented): Protects checkout and order history routes.
+- Admin Panel (optional): For managing products and orders.
+
+---
+
+## 6. Technologies Used
+
+- Next.js (React framework)
+- Node.js (API routes)
+- CSS/SCSS for styling
+- Optional: MongoDB, Stripe, Auth libraries
+
+---
+
+## Summary
+
+This project provides a full-stack e-commerce experience using Next.js, with clear routing for browsing, cart management, checkout, and backend API integration.

@@ -2,6 +2,7 @@ import React from "react";
 import ProductCard from "./ProductCard";
 import Categories from "./Categories";
 import Link from "next/link";
+import Filter from "./Filter";
 
 // Temporary Data
 const Products = [
@@ -119,6 +120,7 @@ const ProductList = ({ category }) => {
   return (
     <div className="max-w-[1180px] mx-auto px-4 sm:px-6 lg:px-8 mt-8">
       <Categories />
+      <Filter />
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 text-black mt-[30px]  2xl:grid-cols-5 gap-5">
         {Products.map((product) => (
           <ProductCard key={product.id} product={product} />

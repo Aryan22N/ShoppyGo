@@ -3,7 +3,8 @@ import Image from "next/image";
 import Hero from "../components/Hero.jsx";
 import ProductList from "../components/ProductList.jsx";
 export default function Home({ searchParams }) {
-  const category = searchParams?.category || "all"; // Default to 'all' if no category is specified
+  const category = searchParams?.category || "all";
+  // Default to 'all' if no category is specified
   // The searchParams object is used to get the category from the URL parameters
   // If no category is specified, it defaults to 'all'
   // This allows the page to display products based on the selected category
@@ -14,7 +15,13 @@ export default function Home({ searchParams }) {
     <div>
       {/* <Image src={Hero} alt="Hero Ing" className="max-w-[1080px]" /> */}
       <Hero />
+      {/* Hero component displays the main promotional content */}
+
       <ProductList category={category} />
+      {/* ProductList component displays products based on the selected category */}
+      {/* The category prop is passed to filter products accordingly */}
+      {/* If no category is selected, it defaults to showing all products */}
+      {/* This allows users to browse products by category or view all products */}
     </div>
   );
 }

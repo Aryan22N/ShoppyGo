@@ -60,18 +60,18 @@ const Categories = () => {
   //usePathname is used to get the current pathname of the URL
   //SelectedCategory is used to get the current selected category from the URL parameters
 
-  const searchParams = useSearchParams();
-  const router = useRouter();
-  const pathname = usePathname();
+  const searchParams = useSearchParams(); // to get the current URL parameters
+  const router = useRouter(); // to navigate to a different URL without reloading the page
+  const pathname = usePathname(); // to get the current pathname of the URL
 
-  const SelectedCategory = searchParams.get("category");
+  const SelectedCategory = searchParams.get("category"); // to get the current selected category from the URL parameters
 
   //handleChange function updates the URL with the selected category
   //and navigates to the same page without reloading
 
   const handleChange = (value) => {
-    const params = new URLSearchParams(searchParams);
-    params.set("category", value || "all");
+    const params = new URLSearchParams(searchParams); // create a new URLSearchParams object from the current search parameters
+    params.set("category", value || "all"); // set the category parameter to the selected value or "all" if no value is provided
     router.push(`${pathname}?${params.toString()}`, { scroll: false }); //scroll: false prevents the page from scrolling to the top when the URL changes
   };
   return (

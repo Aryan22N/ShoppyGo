@@ -3,6 +3,8 @@ import Link from "next/link";
 import Image from "next/image";
 import React from "react";
 import { RiShoppingBasketLine } from "react-icons/ri";
+import { IoCartOutline } from "react-icons/io5";
+
 import { useState } from "react";
 
 const ProductCard = ({ product }) => {
@@ -89,7 +91,7 @@ const ProductCard = ({ product }) => {
               ${product.price.toFixed(2)}
             </span>
             <button className="ring-1 mr-4 mb-3 flex gap-2 shadow-md ring-gray-300 bg-white text-gray-800 px-4 py-2 rounded-md hover:bg-black hover:text-white transition-colors duration-200">
-              <RiShoppingBasketLine className="w-4 h-4 mt-1" />
+              <IoCartOutline className="w-4 h-4 mt-1" />
               Add to Cart
             </button>
           </div>

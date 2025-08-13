@@ -7,6 +7,7 @@ import SearchBar from "./SearchBar";
 import Link from "next/link";
 import logo from "../imgs/shopify.png";
 import Image from "next/image";
+import ShoppingCartIcon from "./ShoppingCartIcon.jsx";
 
 const Navbar = () => {
   return (
@@ -37,7 +38,7 @@ const Navbar = () => {
           <div className="flex items-center space-x-4 mt-2 sm:mt-0">
             <CgProfile size={20} className="text-black" />
             <FaRegBell size={20} className="text-black" />
-            <IoCartOutline size={20} className="text-black" />
+            <ShoppingCartIcon />
             <Link
               href="/signup"
               className="text-gray-700 hover:text-gray-900 font-medium whitespace-nowrap"

@@ -8,7 +8,7 @@ import React from "react";
 const ShoppingCartIcon = () => {
   return (
     <Link href="/cart" className="relative flex items-center">
-      <IoCartOutline size={20} className=" w-4 h-4 text-gray-600" />
+      <IoCartOutline size={20} className=" w-4 h-4 font-extrabold text-black" />
       <span className="absolute -top-3 -right-3 text-gray-600 bg-amber-400 text-center rounded-full font-semibold flex items-center justify-center  px-1 text-xs">
         0
       </span>

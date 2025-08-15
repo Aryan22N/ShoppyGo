@@ -3,6 +3,7 @@
 import React, { use } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { GoArrowRight } from "react-icons/go";
+import { useState } from "react";
 import { FiTrash2 } from "react-icons/fi";
 import AddressForm from "../../components/AddressForm";
 import PaymentForm from "../../components/paymentForm";
@@ -108,6 +109,7 @@ const Cartpage = () => {
 
   const searchParams = useSearchParams();
   const router = useRouter();
+  const [ShippingForm, setShippingForm] = useState();
 
   // Get the active step from the URL search parameters, default to step 1 if not present
   const activeStep = parseInt(searchParams.get("step") || "1");
@@ -151,7 +153,7 @@ const Cartpage = () => {
       {/* Steps & Details */}
       <div className="flex flex-col lg:flex-row w-full mt-[30px] gap-16 ">
         {/* Steps */}
-        <div className="w-full lg:w-7/12 shadow-gray-300 border-0 shadow-lg p-8 rounded-lg text-black flex flex-col gap-8">
+        <div className="w-full lg:w-7/12 shadow-gray-300 border-0 sha dow-lg p-8 rounded-lg text-black flex flex-col gap-8">
           {activeStep === 1 ? (
             <div className="flex flex-col gap-8">
               <h2 className="text-2xl font-semibold mb-4">Cart Items</h2>
@@ -193,7 +195,7 @@ const Cartpage = () => {
               ))}
             </div>
           ) : activeStep === 2 ? (
-            <AddressForm />
+            <AddressForm setShippingForm={setShippingForm} />
           ) : activeStep === 3 ? (
             <PaymentForm />
           ) : (

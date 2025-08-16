@@ -38,7 +38,7 @@ const Navbar = () => {
           <div className="flex items-center space-x-4 mt-2 sm:mt-0">
             <CgProfile size={20} className="text-black" />
             <FaRegBell size={20} className="text-black" />
-            <ShoppingCartIcon className="w-4 h-4" />
+            <ShoppingCartIcon size={20} className="w-4 h-4" />
             <Link
               href="/signup"
               className="text-gray-700 hover:text-gray-900 font-medium whitespace-nowrap"

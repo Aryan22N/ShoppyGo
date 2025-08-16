@@ -2,9 +2,8 @@ import Image from "next/image";
 
 import Hero from "../components/Hero.jsx";
 import ProductList from "../components/ProductList.jsx";
-export default function Home({ searchParams }) {
-  const category = searchParams?.category || "all";
-  // Default to 'all' if no category is specified
+export default async function Home({ searchParams }) {
+  const category = searchParams?.category || "all"; // Default to 'all' if no category is specified
   // The searchParams object is used to get the category from the URL parameters
   // If no category is specified, it defaults to 'all'
   // This allows the page to display products based on the selected category

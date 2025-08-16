@@ -1,7 +1,7 @@
 import ProductList from "../../components/ProductList";
 
-export default function ProductsPage({ searchParams }) {
-  const category = searchParams?.category || "all";
+export default async function ProductsPage({ searchParams }) {
+  const category = (await searchParams?.category) || "all";
 
   return (
     <div>

@@ -1,12 +1,13 @@
 "use client";
 
-import React, { use } from "react";
+import React, { useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { GoArrowRight } from "react-icons/go";
-import { useState } from "react";
 import { FiTrash2 } from "react-icons/fi";
+import { FaIndianRupeeSign } from "react-icons/fa6";
 import AddressForm from "../../components/AddressForm";
 import PaymentForm from "../../components/paymentForm";
+import useCartStore from "../../store/cartstore";
 
 const steps = [
   {
@@ -24,68 +25,80 @@ const steps = [
 ];
 
 //Temporary
-const cartItems = [
-  {
-    id: 1,
-    name: "Adidas CoreFit T-Shirt",
-    shortDescription:
-      "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
-    description:
-      "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
-    price: 39.9,
-    sizes: ["s", "m", "l", "xl", "xxl"],
-    colors: ["gray", "purple", "green"],
-    images: {
-      gray: "/products/1g.png",
-      purple: "/products/1p.png",
-      green: "/products/1gr.png",
-    },
-    quantity: 1,
-    selectedsize: "m",
-    selectedcolor: "gray",
-  },
-  {
-    id: 2,
-    name: "Puma Ultra Warm Zip",
-    shortDescription:
-      "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
-    description:
-      "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
-    price: 59.9,
-    sizes: ["s", "m", "l", "xl"],
-    colors: ["gray", "green"],
-    images: { gray: "/products/2g.png", green: "/products/2gr.png" },
-    quantity: 5,
-    selectedsize: "m",
-    selectedcolor: "gray",
-  },
-  {
-    id: 3,
-    name: "Nike Air Essentials Pullover",
-    shortDescription:
-      "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
-    description:
-      "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
-    price: 69.9,
-    sizes: ["s", "m", "l"],
-    colors: ["green", "blue", "black"],
-    images: {
-      green: "/products/3gr.png",
-      blue: "/products/3b.png",
-      black: "/products/3bl.png",
-    },
-    quantity: 10,
-    selectedsize: "m",
-    selectedcolor: "green",
-  },
-];
+// const cartItems = [
+//   {
+//     id: 1,
+//     name: "Adidas CoreFit T-Shirt",
+//     shortDescription:
+//       "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
+//     description:
+//       "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
+//     price: 499,
+//     sizes: ["s", "m", "l", "xl", "xxl"],
+//     colors: ["gray", "purple", "green"],
+//     images: {
+//       gray: "/products/1g.png",
+//       purple: "/products/1p.png",
+//       green: "/products/1gr.png",
+//     },
+//     quantity: 1,
+//     selectedsize: "m",
+//     selectedcolor: "gray",
+//   },
+//   {
+//     id: 2,
+//     name: "Puma Ultra Warm Zip",
+//     shortDescription:
+//       "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
+//     description:
+//       "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
+//     price: 109,
+//     sizes: ["s", "m", "l", "xl"],
+//     colors: ["gray", "green"],
+//     images: { gray: "/products/2g.png", green: "/products/2gr.png" },
+//     quantity: 5,
+//     selectedsize: "m",
+//     selectedcolor: "gray",
+//   },
+//   {
+//     id: 3,
+//     name: "Nike Air Essentials Pullover",
+//     shortDescription:
+//       "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
+//     description:
+//       "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
+//     price: 99,
+//     sizes: ["s", "m", "l"],
+//     colors: ["green", "blue", "black"],
+//     images: {
+//       green: "/products/3gr.png",
+//       blue: "/products/3b.png",
+//       black: "/products/3bl.png",
+//     },
+//     quantity: 10,
+//     selectedsize: "m",
+//     selectedcolor: "green",
+//   },
+// ];
 
 //logic for the price calculation with respect to quantity
 const Cartpage = () => {
+  //Steps for routing means when we select a step 1 (shopping cart) it will automatically highlight that step and when we select step 2 (shipping address) it will highlight that step and so on.
+
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const [ShippingForm, setShippingForm] = useState();
+
+  // Get the active step from the URL search parameters, default to step 1 if not present
+  const activeStep = parseInt(searchParams.get("step") || "1");
+
+  //remove from cart functionality from zustand
+  const { cart, removeFromCart } = useCartStore();
+
   let subtotal = 0;
   let total = 0;
   // Calculate subtotal by iterating through cart items
-  for (const item of cartItems) {
+  for (const item of cart) {
     subtotal += item.price * item.quantity;
   }
   //logic for discounting the total price
@@ -105,15 +118,10 @@ const Cartpage = () => {
   }
   total += shippingFee; // Add shipping fee to total
 
-  //Steps for routing means when we select a step 1 (shopping cart) it will automatically highlight that step and when we select step 2 (shipping address) it will highlight that step and so on.
-
-  const searchParams = useSearchParams();
-  const router = useRouter();
-  const [ShippingForm, setShippingForm] = useState();
-
-  // Get the active step from the URL search parameters, default to step 1 if not present
-  const activeStep = parseInt(searchParams.get("step") || "1");
-
+  //Delete functionality from cart
+  const handleDelete = (product) => {
+    removeFromCart(product);
+  };
   return (
     <div className="xl:max-w-[1180px] max-w-[1000px] mx-auto ">
       {/* steps(1,2,3) vala part is active selection */}
@@ -157,14 +165,14 @@ const Cartpage = () => {
           {activeStep === 1 ? (
             <div className="flex flex-col gap-8">
               <h2 className="text-2xl font-semibold mb-4">Cart Items</h2>
-              {cartItems.map((item) => (
+              {cart.map((item) => (
                 <div
                   key={item.id}
                   className="flex items-center justify-between  pb-4"
                 >
                   <div className="flex items-center gap-8">
                     <img
-                      src={item.images[item.selectedcolor]}
+                      src={item.images[item.selectedColor]}
                       alt={item.name}
                       className=" w-32 h-32 bg-gray-50 rounded-lg overflow-hidden relative object-cover shadow-md"
                     />
@@ -177,18 +185,22 @@ const Cartpage = () => {
                         </p>
                         <p className="text-sm text-gray-500">
                           {" "}
-                          Size: {item.selectedsize}
+                          Size: {item.selectedSize}
                         </p>
                         <p className="text-sm text-gray-500">
-                          color: {item.selectedcolor}
+                          color: {item.selectedColor}
                         </p>
-                        <p className="text-lg font-semibold mt-8">
-                          ${item.price.toFixed(2)}
+                        <p className="text-lg font-semibold mt-8 flex items-center gap-[0.2px]">
+                          <FaIndianRupeeSign className="w-4 h-4" />
+                          {item.price.toFixed(2)}
                         </p>
                       </div>
                     </div>
                   </div>
-                  <button className="w-8 h-8 rounded-full bg-red-100 hover:bg-red-200 transition-all duration-300 text-red-400 flex items-center justify-center cursor-pointer">
+                  <button
+                    className="w-8 h-8 rounded-full bg-red-100 hover:bg-red-200 transition-all duration-300 text-red-400 flex items-center justify-center cursor-pointer"
+                    onClick={() => handleDelete(item)}
+                  >
                     <FiTrash2 className="w-3 h-3" />
                   </button>
                 </div>
@@ -211,7 +223,10 @@ const Cartpage = () => {
                 <p className="text-gray-700 font-medium text-[16px]">
                   Subtotal
                 </p>
-                <p className="font-medium">${subtotal.toFixed(2)}</p>
+                <p className="font-medium flex items-center gap-[0.2px]">
+                  <FaIndianRupeeSign className="w-3 h-3" />
+                  {subtotal.toFixed(2)}
+                </p>
               </div>
             </div>
             <div className="flex flex-col gap-4">
@@ -219,7 +234,10 @@ const Cartpage = () => {
                 <p className="text-gray-700 font-medium text-[16px]">
                   Discount
                 </p>
-                <p className="font-medium">${discount}</p>
+                <p className="font-medium flex items-center gap-[0.2px]">
+                  <FaIndianRupeeSign className="w-3 h-3" />
+                  {discount}
+                </p>
               </div>
             </div>
             <div className="flex flex-col gap-4">
@@ -229,10 +247,13 @@ const Cartpage = () => {
                     Shipping Fee
                   </p>
                   <p className="text-gray-500 text:sm w-[200px] mt-1 ">
-                    (For no shipping fee subtotal should exceed $1500){" "}
+                    (For zero shipping fee subtotal should exceed 1500 Rs){" "}
                   </p>
                 </div>
-                <p className="font-medium">${shippingFee}</p>
+                <p className="font-medium flex items-center gap-[0.2px]">
+                  <FaIndianRupeeSign className="w-3 h-3" />
+                  {shippingFee}
+                </p>
               </div>
             </div>
 
@@ -240,7 +261,10 @@ const Cartpage = () => {
             <div className="flex flex-col gap-4">
               <div className="flex justify-between text-md font-semibold">
                 <p className="text-gray-800">Total</p>
-                <p className="font-medium">${total.toFixed(2)}</p>
+                <p className="font-medium flex items-center gap-[0.2px]">
+                  <FaIndianRupeeSign className="w-4 h-4" />
+                  {total.toFixed(2)}
+                </p>
               </div>
             </div>
 

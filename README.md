@@ -1,88 +1,83 @@
-# Shoppify E-commerce Project Overview
+# E-commerce Next.js Project - Shoppify
 
-This project is a Next.js-based e-commerce application. Below is a step-by-step explanation of its workflow and routing structure.
-
----
-
-## 1. Project Initialization
-
-- The project uses [Next.js](https://nextjs.org/) for server-side rendering and routing.
-- Dependencies are installed via `npm install` or `yarn`.
+**Live Demo:** https://aryanecomm.netlify.app/
 
 ---
 
-## 2. Folder Structure
+## Table of Contents
 
-```
-/pages
-    /index.js         // Home page
-    /products
-        /[id].js        // Product details page
-    /cart.js          // Shopping cart page
-    /checkout.js      // Checkout page
-    /api
-        /products.js    // API route for products
-        /orders.js      // API route for orders
-/components        // Reusable UI components
-/styles            // CSS/SCSS files
-```
+- [About](#about)
+- [Features](#features)
+- [Getting Started](#getting-started)
+- [Scripts](#scripts)
+- [Tech Stack](#tech-stack)
+- [Contributing](#contributing)
 
 ---
 
-## 3. Routing Structure
+## About
 
-- **Home (`/`)**: Displays featured products and categories.
-- **Product Details (`/products/[id]`)**: Dynamic route showing details for a selected product.
-- **Cart (`/cart`)**: Shows items added to the shopping cart.
-- **Checkout (`/checkout`)**: Handles order placement and payment.
-- **API Routes (`/api/*`)**: Backend endpoints for products and orders.
+Shoppify is a modern e-commerce web application built with Next.js. It provides a seamless shopping experience with product listings, cart management, and checkout functionality.
 
 ---
 
-## 4. Step-by-Step Workflow
+## Features
 
-1. **User visits Home Page (`/`)**
-
-   - Product listings are fetched from the API.
-   - User can browse and select products.
-
-2. **User views Product Details (`/products/[id]`)**
-
-   - Dynamic route loads product info based on the `id` parameter.
-   - User can add product to cart.
-
-3. **User accesses Cart (`/cart`)**
-
-   - Displays all products added.
-   - User can update quantities or remove items.
-
-4. **User proceeds to Checkout (`/checkout`)**
-
-   - User enters shipping and payment details.
-   - Order is submitted via API.
-
-5. **API Routes**
-   - `/api/products`: Handles product data (fetch, create, update).
-   - `/api/orders`: Handles order creation and retrieval.
+- Product catalog with details
+- Shopping cart
+- Responsive design
+- Form verification with Zod
+- Golbal state managed with zustand
 
 ---
 
-## 5. Additional Features
+## Getting Started
 
-- Authentication (if implemented): Protects checkout and order history routes.
-- Admin Panel (optional): For managing products and orders.
+1. **Clone the repository:**
+
+   ```bash
+   git clone https://github.com/your-username/shoppify.git
+   cd shoppify
+   ```
+
+2. **Install dependencies:**
+
+   ```bash
+   npm install
+   ```
+
+3. **Run the development server:**
+
+   ```bash
+   npm run dev
+   ```
+
+4. **Open [http://localhost:3000](http://localhost:3000) in your browser.**
 
 ---
 
-## 6. Technologies Used
+## Scripts
 
-- Next.js (React framework)
-- Node.js (API routes)
-- CSS/SCSS for styling
-- Optional: MongoDB, Stripe, Auth libraries
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm start` - Start production server
 
 ---
 
-## Summary
+## Tech Stack
 
-This project provides a full-stack e-commerce experience using Next.js, with clear routing for browsing, cart management, checkout, and backend API integration.
+- [Next.js](https://nextjs.org/)
+- [React](https://react.dev/)
+- [Tailwind](https://tailwindcss.com/)
+- [Zod](https://zod.dev/)
+- [zustand](https://zustand-demo.pmnd.rs/)
+- [Netlify](https://www.netlify.com/)
+- [toastify](https://www.npmjs.com/package/react-toastify)
+
+---
+
+## Contributing
+
+Contributions are welcome! Please open issues or submit pull requests for improvements.
+
+---

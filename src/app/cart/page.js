@@ -108,12 +108,12 @@ const Cartpage = () => {
     total = subtotal - discount; // Apply discount to total
   }
   //logic for shipping fee
-  let shippingFee = 40; // Flat shipping fee
+  let shippingFee = 0; // Flat shipping fee
 
-  if (subtotal > 500) {
-    shippingFee = 10; // Free shipping for orders over $200
+  if (subtotal < 500 && subtotal > 0) {
+    shippingFee = 30; // Free shipping for orders over $200
   }
-  if (subtotal > 1500) {
+  if (subtotal > 1000) {
     shippingFee = 0; // Free shipping for orders over $500
   }
   total += shippingFee; // Add shipping fee to total
@@ -167,7 +167,7 @@ const Cartpage = () => {
               <h2 className="text-2xl font-semibold mb-4">Cart Items</h2>
               {cart.map((item) => (
                 <div
-                  key={item.id}
+                  key={item.id + item.selectedColor + item.selectedSize}
                   className="flex items-center justify-between  pb-4"
                 >
                   <div className="flex items-center gap-8">
@@ -247,7 +247,7 @@ const Cartpage = () => {
                     Shipping Fee
                   </p>
                   <p className="text-gray-500 text:sm w-[200px] mt-1 ">
-                    (For zero shipping fee subtotal should exceed 1500 Rs){" "}
+                    (For zero shipping fee subtotal should exceed 1000 Rs){" "}
                   </p>
                 </div>
                 <p className="font-medium flex items-center gap-[0.2px]">
